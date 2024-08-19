@@ -1,0 +1,165 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Cadastro de Livro</h4>
+</div>
+<form [formGroup]="cadastroForm" (submit)="salvarLivro()">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="titulo" class="form-label">Título</label>
+        <input type="text" id="titulo" formControlName="titulo"
+          class="form-control" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="editora" class="form-label">Editora</label>
+        <input type="text" id="editora" formControlName="editora"
+          class="form-control" required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="edicao" class="form-label">Edição</label>
+        <input type="text" id="edicao" formControlName="edicao"
+          class="form-control" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="anoPublicacao" class="form-label">Ano de Publicação</label>
+        <input type="number" id="anoPublicacao" formControlName="anoPublicacao"
+          class="form-control" required>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="autores-tab" data-bs-toggle="tab"
+          href="#autores" role="tab" aria-controls="autores"
+          aria-selected="true">Autores</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="assuntos-tab" data-bs-toggle="tab"
+          href="#assuntos" role="tab" aria-controls="assuntos"
+          aria-selected="false">Assuntos</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="precos-tab" data-bs-toggle="tab" href="#precos"
+          role="tab" aria-controls="precos" aria-selected="false">Preços</a>
+      </li>
+    </ul>
+    <div class="tab-content mt-3" id="myTabContent">
+
+      <!-- Conteúdo da aba Autores -->
+      <div class="tab-pane fade show active small-text" id="autores" role="tabpanel"
+        aria-labelledby="autores-tab">
+
+        <div class="col">
+          <div class="row">
+            <label for="autorSelect" class="form-label">Selecionar Autor</label>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <select id="autorSelect" class="form-select small-text" #autorSelecionado style="width: 100%;" >
+                <option *ngFor="let autor of listaAutores" [value]="autor.codAu">{{ autor.nome }}</option>
+              </select>
+            </div>
+            <div class="col-4">
+              <button type="button"
+              class="btn btn-primary small-text" (click)="adicionarAutor(autorSelecionado)">Adicionar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabela para exibir autores adicionados -->
+        <table class="table table-striped mt-3 table-hover">
+          <thead>
+            <tr>
+              <th scope="col" class="col-descricao">Nome</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let autor of autoresAdicionados">
+              <td>{{ autor.nome }}</td>
+              <td class="preco-input">
+                <button type="button" class="btn btn-danger btn-sm small-text" (click)="removerAutor(autor)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tab-pane fade small-text" id="assuntos" role="tabpanel" aria-labelledby="assuntos-tab">
+        <!-- Conteúdo da aba Assuntos -->
+        <div class="col">
+          <div class="row">
+            <label for="assuntoSelect" class="form-label">Selecionar Assunto</label>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <select id="assuntoSelect" class="form-select small-text" #assuntoSelecionado style="width: 100%;" >
+                <option *ngFor="let assunto of listaAssuntos" [value]="assunto.codAs">{{ assunto.descricao }}</option>
+              </select>
+            </div>
+            <div class="col-4 preco-input">
+              <button type="button"
+              class="btn btn-primary small-text" (click)="adicionarAssunto(assuntoSelecionado)">Adicionar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabela para exibir autores adicionados -->
+        <table class="table table-striped mt-3 table-hover">
+          <thead>
+            <tr>
+              <th scope="col" class="col-descricao">Descriçao</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let assunto of assuntosAdicionados">
+              <td>{{ assunto.descricao }}</td>
+              <td  class="preco-input">
+                <button type="button" class="btn btn-danger btn-sm small-text" (click)="removerAssunto(assunto)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tab-pane fade" id="precos" role="tabpanel"
+        aria-labelledby="precos-tab">
+        <!-- Conteúdo da aba Preços -->
+        
+        <table class="table table-striped mt-3 table-hover small-text" >
+          <thead>
+            <tr>
+              <th scope="col" class="col-descricao">Descrição</th>
+              <th scope="col">Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of precos">
+              <td>{{ item.descricao }}</td>
+              <input 
+              type="text" 
+              class="form-control preco-input small-text"
+              [value]="formatPreco(item.preco)" 
+              (blur)="onPrecoBlur(item, $event)" 
+              (focus)="onPrecoFocus($event)" 
+               />
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary"
+      (click)="modalRef.dismiss()">Fechar</button>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </div>
+</form>

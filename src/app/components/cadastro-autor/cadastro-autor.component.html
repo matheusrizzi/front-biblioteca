@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Cadastro de Autor</h4>
+</div>
+<form [formGroup]="itemForm" (submit)="salvarAutor()">
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="descricao" class="form-label">Nome</label>
+      <input type="text" id="descricao" formControlName="nome"
+        class="form-control" required>
+        <div class="validation-container">
+          <div *ngIf="itemForm.get('nome')?.invalid && (itemForm.get('nome')?.dirty || itemForm.get('nome')?.touched)" class="validation-message">
+            <div *ngIf="itemForm.get('nome')?.errors?.['required']">
+              * O nome é obrigatório.
+            </div>
+            <div *ngIf="itemForm.get('nome')?.errors?.['maxlength']">
+              * O nome deve ter no máximo 40 caracteres.
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary"
+      (click)="modalRef.dismiss()">Fechar</button>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </div>
+</form>

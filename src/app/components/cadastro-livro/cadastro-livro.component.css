@@ -1,0 +1,24 @@
+.modal-lg-custom {
+    max-width: 80%; 
+  }
+
+  .custom-select {
+    width: 70%;
+  }
+  
+  .custom-button {
+    margin-left: 10px;
+  }
+
+  .small-text {
+    font-size: 0.8rem; 
+  }
+
+  .preco-input {
+    text-align: right;
+    border-radius: 0;
+  }
+
+  .col-descricao {
+    width: 70%; 
+  }

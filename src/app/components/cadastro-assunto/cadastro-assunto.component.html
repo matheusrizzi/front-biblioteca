@@ -1,0 +1,29 @@
+ <div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Cadastro de Assunto</h4>
+</div>
+<form [formGroup]="cadastroForm" (submit)="salvarAssunto()">
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="descricao" class="form-label">Descrição</label>
+      <input type="text" id="descricao" formControlName="descricao"
+        class="form-control" required>
+      <div class="validation-container">
+        <div
+          *ngIf="cadastroForm.get('descricao')?.invalid && (cadastroForm.get('descricao')?.dirty || cadastroForm.get('descricao')?.touched)"
+          class="validation-message">
+          <div *ngIf="cadastroForm.get('descricao')?.errors?.['required']">
+            * A descrição é obrigatória.
+          </div>
+          <div *ngIf="cadastroForm.get('descricao')?.errors?.['maxlength']">
+            * A descrição deve ter no máximo 20 caracteres.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary"
+      (click)="modalRef.dismiss()">Fechar</button>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </div>
+</form>

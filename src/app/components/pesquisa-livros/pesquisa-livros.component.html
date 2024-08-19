@@ -1,0 +1,10 @@
+<section class="results">
+  <app-livro *ngFor="let livro of livroLista" [livro]="livro"></app-livro>
+
+  <button type="button" class="btn btn-primary btn-floating"
+    (click)="abrirCadastroModal()">
+    <i class="bi bi-book"></i>&nbsp;
+    Adicionar Livro
+  </button>
+
+</section>

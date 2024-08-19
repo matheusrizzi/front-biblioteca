@@ -1,0 +1,23 @@
+.small-text {
+    font-size: 0.8rem; 
+  }
+
+  .col-titulo {
+    width: 40%; 
+  }
+  
+  .col-editora {
+    width: 30%; 
+  }
+  
+  .col-edicao {
+    width: 15%; 
+  }
+  
+  .col-ano {
+    width: 15%; 
+  }
+
+  #relatorio {
+    margin: 5px;
+  }
