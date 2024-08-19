@@ -1,0 +1,17 @@
+<div class="listing">
+
+    <img class="listing-photo" [src]="livro.imagem"
+        (error)="onImageError($event)">
+    <h2 class="listing-heading"><b>{{livro.titulo}}</b></h2>
+    <p class="listing-location">Editora: {{livro.editora}}<br />Edição:
+        {{livro.edicao}}<br />Ano: {{livro.anoPublicacao}}
+        <br /> <br />
+        <button type="button" class="btn btn-warning btn-sm"
+            (click)="editarItem(livro)"><i
+                class="bi bi-pencil-square"></i>&nbsp;Editar</button>&nbsp;
+        <button type="button" class="btn btn-danger btn-sm"
+            (click)="excluirLivro(livro.codl)"><i
+                class="bi bi-trash"></i>&nbsp;Excluir</button>
+    </p>
+
+</div>

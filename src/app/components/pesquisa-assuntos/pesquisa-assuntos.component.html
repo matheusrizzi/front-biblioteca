@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Lista de Assuntos</h2>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Descrição</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let assunto of listaAssunto">
+        <td>{{assunto.descricao}}</td>
+        <td class="text-end">
+          <button class="btn btn-warning btn-sm"
+          (click)="editarItem(assunto)"><i class="bi bi-pencil-square"></i>&nbsp;Editar</button> &nbsp;
+          <button class="btn btn-danger btn-sm"
+            (click)="deleteAssunto(assunto.codAs)"><i class="bi bi-trash"></i>&nbsp;Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button type="button" class="btn btn-primary btn-floating"(click)="abrirCadastroModal()">
+    <i class="bi bi-plus-circle"></i>&nbsp;
+    Adicionar Assunto
+  </button>
+</div>

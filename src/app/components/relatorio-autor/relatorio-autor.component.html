@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <div id="relatorio">
+        <h2 class="text-center mb-4">Autores e seus livros</h2>
+        <div *ngFor="let dados of relatorioViewModel" class="author-section">
+            <h5 class="mt-5">{{ dados.nomeAutor }}</h5>
+            <table class="table table-striped  table-hover small-text">
+                <thead>
+                    <tr>
+                        <th class="col-titulo">Título</th>
+                        <th class="col-editora">Editora</th>
+                        <th class="col-edicao">Edição</th>
+                        <th class="col-ano">Ano de Publicação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let livro of dados.livros">
+                        <td>{{ livro.titulo }}</td>
+                        <td>{{ livro.editora }}</td>
+                        <td>{{ livro.edicao }}</td>
+                        <td>{{ livro.anoPublicacao }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr />
+        </div>
+    </div>
+    <button class="btn btn-primary mb-3 btn-floating" (click)="exportToPDF()">Exportar para PDF</button>
+
+</div>
